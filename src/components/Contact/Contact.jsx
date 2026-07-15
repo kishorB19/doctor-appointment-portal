@@ -35,14 +35,14 @@ const Contact = () => {
 		{
 			icon: <FaPhoneAlt />,
 			title: 'Call us',
-			content: '+1 (555) 123-4567',
-			link: 'tel:+1 (555) 123-4567'
+			content: '8788366909',
+			link: 'tel:8788366909'
 		},
 		{
 			icon: <FaEnvelope />,
 			title: 'Email us',
-			content: 'ujjalzaman@gmail.com',
-			link: 'mailto:ujjalzaman@gmail.com'
+			content: 'kishor.birajdar@gmail.com',
+			link: 'mailto:kishor.birajdar@gmail.com'
 		},
 		{
 			icon: <FaClock />,

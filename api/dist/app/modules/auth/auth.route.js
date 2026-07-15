@@ -8,6 +8,7 @@ const express_1 = __importDefault(require("express"));
 const auth_controller_1 = require("./auth.controller");
 const router = express_1.default.Router();
 router.post('/login', auth_controller_1.AuthController.Login);
+router.post('/google', auth_controller_1.AuthController.GoogleLogin);
 router.post('/reset-password', auth_controller_1.AuthController.resetPassword);
 router.post('/reset-password/confirm', auth_controller_1.AuthController.PasswordResetConfirm);
 router.get('/user/verify/:userId/:uniqueString', auth_controller_1.AuthController.VerifyUser);

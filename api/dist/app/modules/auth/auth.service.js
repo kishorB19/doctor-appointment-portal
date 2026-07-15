@@ -56,6 +56,9 @@ const moment_1 = __importDefault(require("moment"));
 const emailTransporter_1 = require("../../../helpers/emailTransporter");
 const { v4: uuidv4 } = require('uuid');
 const path = __importStar(require("path"));
+const crypto_1 = __importDefault(require("crypto"));
+const google_auth_library_1 = require("google-auth-library");
+const googleClient = new google_auth_library_1.OAuth2Client(config_1.default.googleClientId);
 const loginUser = (user) => __awaiter(void 0, void 0, void 0, function* () {
     const { email: IEmail, password } = user;
     const isUserExist = yield prisma_1.default.auth.findUnique({
@@ -80,6 +83,57 @@ const loginUser = (user) => __awaiter(void 0, void 0, void 0, function* () {
         throw new apiError_1.default(http_status_1.default.NOT_FOUND, "Password is not Matched !");
     }
     const { role, userId, isDemo, email } = isUserExist;
+    const accessToken = jwtHelper_1.JwtHelper.createToken({ role, userId, email, isDemo: role === 'admin' ? Boolean(isDemo) : false }, config_1.default.jwt.secret, config_1.default.jwt.JWT_EXPIRES_IN);
+    return {
+        accessToken,
+        user: { role, userId, email, isDemo: role === 'admin' ? Boolean(isDemo) : false },
+    };
+});
+const googleLogin = (_a) => __awaiter(void 0, [_a], void 0, function* ({ credential }) {
+    if (!credential) {
+        throw new apiError_1.default(http_status_1.default.BAD_REQUEST, 'Google credential is required.');
+    }
+    let payload;
+    try {
+        const ticket = yield googleClient.verifyIdToken({
+            idToken: credential,
+            audience: config_1.default.googleClientId,
+        });
+        payload = ticket.getPayload();
+    }
+    catch (_b) {
+        throw new apiError_1.default(http_status_1.default.UNAUTHORIZED, 'Google sign-in could not be verified.');
+    }
+    if (!(payload === null || payload === void 0 ? void 0 : payload.email) || !payload.email_verified) {
+        throw new apiError_1.default(http_status_1.default.UNAUTHORIZED, 'A verified Google email address is required.');
+    }
+    let user = yield prisma_1.default.auth.findUnique({ where: { email: payload.email } });
+    if (!user) {
+        const nameParts = (payload.name || payload.email.split('@')[0]).trim().split(/\s+/);
+        const firstName = nameParts[0] || 'Google';
+        const lastName = nameParts.slice(1).join(' ') || 'User';
+        const password = yield bcrypt_1.default.hash(crypto_1.default.randomBytes(32).toString('hex'), 12);
+        const created = yield prisma_1.default.$transaction((tx) => __awaiter(void 0, void 0, void 0, function* () {
+            const patient = yield tx.patient.create({
+                data: {
+                    firstName,
+                    lastName,
+                    email: payload.email,
+                    img: payload.picture || undefined,
+                },
+            });
+            return tx.auth.create({
+                data: {
+                    email: patient.email,
+                    password,
+                    role: 'patient',
+                    userId: patient.id,
+                },
+            });
+        }));
+        user = created;
+    }
+    const { role, userId, isDemo, email } = user;
     const accessToken = jwtHelper_1.JwtHelper.createToken({ role, userId, email, isDemo: role === 'admin' ? Boolean(isDemo) : false }, config_1.default.jwt.secret, config_1.default.jwt.JWT_EXPIRES_IN);
     return {
         accessToken,
@@ -206,6 +260,7 @@ const PassworResetConfirm = (payload) => __awaiter(void 0, void 0, void 0, funct
 });
 exports.AuthService = {
     loginUser,
+    googleLogin,
     VerificationUser,
     resetPassword,
     PassworResetConfirm

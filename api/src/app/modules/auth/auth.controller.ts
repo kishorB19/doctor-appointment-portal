@@ -25,6 +25,15 @@ const Login = catchAsync(async (req: Request, res: Response) => {
         data: result,
     })
 })
+const GoogleLogin = catchAsync(async (req: Request, res: Response) => {
+    const result = await AuthService.googleLogin(req.body);
+    sendResponse(res, {
+        statusCode: 200,
+        message: 'Successfully signed in with Google',
+        success: true,
+        data: result,
+    });
+})
 const resetPassword = catchAsync(async (req: Request, res: Response) => {
     const result = await AuthService.resetPassword(req.body);
     sendResponse(res, {
@@ -99,6 +108,7 @@ const VerficationExpired = catchAsync(async (req: Request, res: Response) => {
 
 export const AuthController = {
     Login,
+    GoogleLogin,
     VerifyUser,
     Verified,
     VerficationExpired,

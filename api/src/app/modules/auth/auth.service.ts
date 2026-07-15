@@ -9,6 +9,10 @@ import moment from 'moment';
 import { EmailtTransporter } from '../../../helpers/emailTransporter';
 const { v4: uuidv4 } = require('uuid');
 import * as path from 'path';
+import crypto from 'crypto';
+import { OAuth2Client } from 'google-auth-library';
+
+const googleClient = new OAuth2Client(config.googleClientId);
 
 type ILginResponse = {
     accessToken?: string;
@@ -51,6 +55,90 @@ const loginUser = async (user: any): Promise<ILginResponse> => {
         user: { role, userId, email, isDemo: role === 'admin' ? Boolean(isDemo) : false },
     }
 }
+
+const googleLogin = async ({ credential }: { credential?: string }): Promise<ILginResponse> => {
+    if (!credential) {
+        throw new ApiError(httpStatus.BAD_REQUEST, 'Google credential is required.');
+    }
+
+    let payload;
+    try {
+        const ticket = await googleClient.verifyIdToken({
+            idToken: credential,
+            audience: config.googleClientId,
+        });
+        payload = ticket.getPayload();
+    } catch {
+        throw new ApiError(httpStatus.UNAUTHORIZED, 'Google sign-in could not be verified.');
+    }
+
+    if (!payload?.email || !payload.email_verified) {
+        throw new ApiError(httpStatus.UNAUTHORIZED, 'A verified Google email address is required.');
+    }
+
+    let user = await prisma.auth.findUnique({ where: { email: payload.email } });
+
+    if (!user) {
+        const existingPatient = await prisma.patient.findUnique({ where: { email: payload.email } });
+        const existingDoctor = await prisma.doctor.findUnique({ where: { email: payload.email } });
+
+        const nameParts = (payload.name || payload.email.split('@')[0]).trim().split(/\s+/);
+        const firstName = nameParts[0] || 'Google';
+        const lastName = nameParts.slice(1).join(' ') || 'User';
+        const password = await bcrypt.hash(crypto.randomBytes(32).toString('hex'), 12);
+
+        if (existingPatient) {
+            user = await prisma.auth.create({
+                data: {
+                    email: payload.email,
+                    password,
+                    role: 'patient',
+                    userId: existingPatient.id,
+                },
+            });
+        } else if (existingDoctor) {
+            user = await prisma.auth.create({
+                data: {
+                    email: payload.email,
+                    password,
+                    role: 'doctor',
+                    userId: existingDoctor.id,
+                },
+            });
+        } else {
+            const created = await prisma.$transaction(async (tx) => {
+                const patient = await tx.patient.create({
+                    data: {
+                        firstName,
+                        lastName,
+                        email: payload!.email!,
+                        img: payload!.picture || undefined,
+                    },
+                });
+                return tx.auth.create({
+                    data: {
+                        email: patient.email,
+                        password,
+                        role: 'patient',
+                        userId: patient.id,
+                    },
+                });
+            });
+            user = created;
+        }
+    }
+
+    const { role, userId, isDemo, email } = user;
+    const accessToken = JwtHelper.createToken(
+        { role, userId, email, isDemo: role === 'admin' ? Boolean(isDemo) : false },
+        config.jwt.secret as Secret,
+        config.jwt.JWT_EXPIRES_IN as string,
+    );
+    return {
+        accessToken,
+        user: { role, userId, email, isDemo: role === 'admin' ? Boolean(isDemo) : false },
+    };
+};
 
 const VerificationUser = async (user: any): Promise<ILginResponse> => {
     const { email: IEmail, password } = user;
@@ -182,6 +270,7 @@ const PassworResetConfirm = async (payload: any): Promise<any> => {
 
 export const AuthService = {
     loginUser,
+    googleLogin,
     VerificationUser,
     resetPassword,
     PassworResetConfirm

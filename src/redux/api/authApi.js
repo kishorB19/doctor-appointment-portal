@@ -19,6 +19,20 @@ export const authApi = baseApi.injectEndpoints({
                 }
             },
         }),
+        googleLogin: build.mutation({
+            query: (credential) => ({
+                url: `${AUTH_URL}/google`,
+                method: 'POST',
+                data: { credential },
+            }),
+            async onQueryStarted(arg, { queryFulfilled }) {
+                try {
+                    const result = (await queryFulfilled).data;
+                    setUserInfo({ accessToken: result.accessToken });
+                } catch (error) {
+                }
+            },
+        }),
         patientSignUp: build.mutation({
             query: (data) => ({
                 url: `/patient`,
@@ -52,6 +66,7 @@ export const authApi = baseApi.injectEndpoints({
 
 export const { 
     useUserLoginMutation, 
+    useGoogleLoginMutation,
     useDoctorSignUpMutation, 
     usePatientSignUpMutation,
     useResetPasswordMutation, 

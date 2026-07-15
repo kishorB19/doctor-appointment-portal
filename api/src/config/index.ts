@@ -2,6 +2,7 @@ import dotenv from 'dotenv';
 import path from 'path';
 
 dotenv.config({path: path.join(process.cwd(), '.env')});
+dotenv.config({ path: path.join(process.cwd(), '.env.mail'), override: true });
 
 const clientUrl = process.env.NODE_ENV==="development" ? process.env.CLIENT__LOCAL_URL : process.env.CLIENT_URL
 
@@ -32,5 +33,6 @@ export default {
     gmail_app_Email: process.env.GMAIL_APP_EMAIL,
     defaultAdminDoctor: process.env.DEFULT_ADMIN_DOCTOR,
     backendLiveUrl: process.env.BACKEND_LIVE_URL,
-    backendLocalUrl: process.env.BACKEND_LOCAL_URL
+    backendLocalUrl: process.env.BACKEND_LOCAL_URL,
+    googleClientId: process.env.GOOGLE_CLIENT_ID || '73965721586-3nrepvbublogudnahqjq7pqoq118g96k.apps.googleusercontent.com'
 }

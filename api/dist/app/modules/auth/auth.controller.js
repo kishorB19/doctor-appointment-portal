@@ -37,6 +37,15 @@ const Login = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, 
         data: result,
     });
 }));
+const GoogleLogin = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield auth_service_1.AuthService.googleLogin(req.body);
+    (0, sendResponse_1.default)(res, {
+        statusCode: 200,
+        message: 'Successfully signed in with Google',
+        success: true,
+        data: result,
+    });
+}));
 const resetPassword = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield auth_service_1.AuthService.resetPassword(req.body);
     (0, sendResponse_1.default)(res, {
@@ -106,6 +115,7 @@ const VerficationExpired = (0, catchAsync_1.default)((req, res) => __awaiter(voi
 }));
 exports.AuthController = {
     Login,
+    GoogleLogin,
     VerifyUser,
     Verified,
     VerficationExpired,

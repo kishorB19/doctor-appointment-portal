@@ -1,6 +1,7 @@
 import ApiError from '../../../errors/apiError';
 import httpStatus from 'http-status';
 import { Transporter } from '../../../helpers/Transporter';
+import config from '../../../config';
 
 interface ContactPayload {
     email: string;
@@ -19,7 +20,7 @@ const contactUs = async (payload: ContactPayload): Promise<{ message: string }> 
     try {
         const mailOptions = {
             from: `"${firstName + ' ' + lastName}" <${email}>`,
-            to: 'ujjalzaman+doctor@gmail.com',
+            to: config.adminEmail || 'kishorbirajdar313@gmail.com',
             subject: subject,
             text: text
         };

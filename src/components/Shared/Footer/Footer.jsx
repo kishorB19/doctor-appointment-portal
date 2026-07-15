@@ -50,15 +50,15 @@ const Footer = () => {
 								<h3 className="footer-title">Contact us</h3>
 								<div className="footer-contact__item">
 									<FaMapMarkerAlt className="footer-contact__icon" />
-									<p>121, Mirzapur Union Office,<br />Sylhet, Bangladesh 3100</p>
+									<p>Kolhapur</p>
 								</div>
 								<div className="footer-contact__item">
 									<FaPhoneAlt className="footer-contact__icon" />
-									<p><a href="tel:+1 (555) 123-4567">+1 (555) 123-4567</a></p>
+									<p><a href="tel:8788366909">8788366909</a></p>
 								</div>
 								<div className="footer-contact__item">
 									<FaEnvelope className="footer-contact__icon" />
-									<p><a href="mailto:ujjalzaman@gmail.com">ujjalzaman@gmail.com</a></p>
+									<p><a href="mailto:kishor.birajdar@gmail.com">kishor.birajdar@gmail.com</a></p>
 								</div>
 							</div>
 						</div>

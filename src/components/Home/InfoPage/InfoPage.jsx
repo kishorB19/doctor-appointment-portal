@@ -39,7 +39,7 @@ const InfoPage = () => {
 										<FaPhoneAlt />
 									</div>
 									<h4>Emergency care</h4>
-									<span className="info-box-sub">+1 (555) 123-4567</span>
+									<span className="info-box-sub">8788366909</span>
 									<p>Urgent medical support when you need it. Our team is ready to guide you 24 hours a day.</p>
 								</div>
 							</div>

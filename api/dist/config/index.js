@@ -7,6 +7,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const dotenv_1 = __importDefault(require("dotenv"));
 const path_1 = __importDefault(require("path"));
 dotenv_1.default.config({ path: path_1.default.join(process.cwd(), '.env') });
+dotenv_1.default.config({ path: path_1.default.join(process.cwd(), '.env.mail'), override: true });
 const clientUrl = process.env.NODE_ENV === "development" ? process.env.CLIENT__LOCAL_URL : process.env.CLIENT_URL;
 const showErrorDetails = process.env.NODE_ENV !== 'production' ||
     process.env.SHOW_ERROR_DETAILS === 'true' ||
@@ -32,5 +33,6 @@ exports.default = {
     gmail_app_Email: process.env.GMAIL_APP_EMAIL,
     defaultAdminDoctor: process.env.DEFULT_ADMIN_DOCTOR,
     backendLiveUrl: process.env.BACKEND_LIVE_URL,
-    backendLocalUrl: process.env.BACKEND_LOCAL_URL
+    backendLocalUrl: process.env.BACKEND_LOCAL_URL,
+    googleClientId: process.env.GOOGLE_CLIENT_ID || '73965721586-3nrepvbublogudnahqjq7pqoq118g96k.apps.googleusercontent.com'
 };
