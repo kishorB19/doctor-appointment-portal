@@ -1,7 +1,7 @@
 import React from 'react';
 import AdminLayout from '../AdminLayout/AdminLayout';
 import { Card, Row, Col, Table, Statistic, Empty, Spin } from 'antd';
-import { FaUserMd, FaUsers, FaCalendarCheck, FaDollarSign, FaArrowUp, FaArrowDown } from 'react-icons/fa';
+import { FaUserMd, FaUsers, FaCalendarCheck, FaRupeeSign, FaArrowUp, FaArrowDown } from 'react-icons/fa';
 import { useGetDoctorsQuery } from '../../../redux/api/doctorApi';
 import { useGetAllAppointmentsQuery, useGetAllPatientsQuery } from '../../../redux/api/adminApi';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, LineChart, Line, PieChart, Pie, Cell } from 'recharts';
@@ -92,8 +92,8 @@ const AdminDashboard = () => {
         },
         {
             title: 'Revenue',
-            value: `$${totalRevenue.toFixed(0)}`,
-            icon: <FaDollarSign />,
+            value: `₹${totalRevenue.toFixed(0)}`,
+            icon: <FaRupeeSign />,
             color: 'info',
             trend: { value: 15, isUp: true },
         },

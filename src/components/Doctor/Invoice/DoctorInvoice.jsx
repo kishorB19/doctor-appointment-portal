@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useGetDoctorInvoicesQuery } from '../../../redux/api/appointmentApi';
 import DashboardLayout from '../DashboardLayout/DashboardLayout';
 import { Card, Table, Input, Tag, Button, DatePicker, Select, Space, Avatar, Badge } from 'antd';
-import { FaEye, FaSearch, FaDollarSign, FaCreditCard, FaCalendar, FaDownload } from 'react-icons/fa';
+import { FaEye, FaSearch, FaRupeeSign, FaCreditCard, FaCalendar, FaDownload } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
 import './DoctorInvoice.css';
@@ -44,9 +44,9 @@ const DoctorInvoice = () => {
         },
         {
             title: 'Total Revenue',
-            count: `$${totalRevenue.toFixed(2)}`,
+            count: `₹${totalRevenue.toFixed(2)}`,
             color: 'success',
-            icon: <FaDollarSign />,
+            icon: <FaRupeeSign />,
         },
         {
             title: 'Card Payments',
@@ -58,7 +58,7 @@ const DoctorInvoice = () => {
             title: 'Cash Payments',
             count: filteredData?.filter(i => i?.paymentMethod?.toLowerCase() === 'cash')?.length || 0,
             color: 'warning',
-            icon: <FaDollarSign />,
+            icon: <FaRupeeSign />,
         },
     ];
 
@@ -93,7 +93,7 @@ const DoctorInvoice = () => {
             width: 120,
             sorter: (a, b) => a.totalAmount - b.totalAmount,
             render: (_, record) => (
-                <div className="fw-bold text-success">${record?.totalAmount}</div>
+                <div className="fw-bold text-success">₹{record?.totalAmount}</div>
             ),
         },
         {

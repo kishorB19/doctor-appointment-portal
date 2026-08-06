@@ -41,8 +41,8 @@ const Contact = () => {
 		{
 			icon: <FaEnvelope />,
 			title: 'Email us',
-			content: 'kishor1912.b@gmail.com',
-			link: 'mailto:kishor1912.b@gmail.com'
+			content: 'kishor.birajdar@gmail.com',
+			link: 'mailto:kishor.birajdar@gmail.com'
 		},
 		{
 			icon: <FaClock />,

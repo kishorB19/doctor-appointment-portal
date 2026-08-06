@@ -4,7 +4,7 @@ import useAuthCheck from '../../../redux/hooks/useAuthCheck';
 import {
 	FaCalendarCheck,
 	FaUserInjured,
-	FaDollarSign,
+	FaRupeeSign,
 	FaStar,
 	FaArrowUp,
 	FaClock,
@@ -164,9 +164,9 @@ const DoctorDashboard = () => {
 
 				<div className="dashboard-stat-card stat-card--info">
 					<div className="dashboard-stat-icon">
-						<FaDollarSign />
+						<FaRupeeSign />
 					</div>
-					<div className="dashboard-stat-value">${stats.totalRevenue.toFixed(0)}</div>
+					<div className="dashboard-stat-value">₹{stats.totalRevenue.toFixed(0)}</div>
 					<div className="dashboard-stat-label">Total Revenue</div>
 				</div>
 			</div>
@@ -402,9 +402,9 @@ const PatientDashboard = () => {
 
 				<div className="dashboard-stat-card stat-card--info">
 					<div className="dashboard-stat-icon">
-						<FaDollarSign />
+						<FaRupeeSign />
 					</div>
-					<div className="dashboard-stat-value">${stats.totalSpent.toFixed(0)}</div>
+					<div className="dashboard-stat-value">₹{stats.totalSpent.toFixed(0)}</div>
 					<div className="dashboard-stat-label">Total Spent</div>
 				</div>
 			</div>

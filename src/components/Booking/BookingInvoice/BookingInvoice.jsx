@@ -131,7 +131,7 @@ const BookingInvoice = () => {
                     </div>
                     <div className="other-info">
                         <h4>Other information</h4>
-                        <p className="text-muted mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sed dictum ligula, cursus blandit risus. Maecenas eget metus non tellus dignissim aliquam ut a ex. Maecenas sed vehicula dui, ac suscipit lacus. Sed finibus leo vitae lorem interdum, eu scelerisque tellus fermentum. Curabitur sit amet lacinia lorem. Nullam finibus pellentesque libero.</p>
+                        <p className="text-muted mb-0">Thank you for choosing our healthcare portal. Please retain this invoice for your personal records and medical insurance claims. If you have any questions regarding this invoice, please contact support.</p>
                     </div>
 
                 </div>

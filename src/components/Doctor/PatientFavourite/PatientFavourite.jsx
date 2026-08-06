@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import DashboardLayout from '../DashboardLayout/DashboardLayout';
 import { useGetFavouriteQuery, useRemoveFavouriteMutation } from '../../../redux/api/favouriteApi';
 import { Card, Empty, message, Button, Avatar, Tag, Rate, Spin } from 'antd';
-import { FaMapMarkerAlt, FaCheckCircle, FaHeart, FaDollarSign, FaCalendar, FaUser } from "react-icons/fa";
+import { FaMapMarkerAlt, FaCheckCircle, FaHeart, FaRupeeSign, FaCalendar, FaUser } from "react-icons/fa";
 import './PatientFavourite.css';
 
 const PatientFavouriteDoctor = () => {
@@ -105,8 +105,8 @@ const PatientFavouriteDoctor = () => {
                                             <span>{item?.doctor?.city || 'N/A'}, {item?.doctor?.state || 'N/A'}</span>
                                         </div>
                                         <div className="info-item">
-                                            <FaDollarSign className="info-icon" />
-                                            <span>${item?.doctor?.price || 100} per consultation</span>
+                                            <FaRupeeSign className="info-icon" />
+                                            <span>₹{item?.doctor?.price || 100} per consultation</span>
                                         </div>
                                         {item?.doctor?.experience && (
                                             <div className="info-item">

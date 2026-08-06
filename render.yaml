@@ -1,0 +1,62 @@
+# Render Blueprint – Doctor Appointment Portal
+# https://render.com/docs/blueprint-spec
+
+services:
+  # ── Backend API (Web Service) ──────────────────────────────────
+  - type: web
+    name: doctor-appointment-api
+    runtime: node
+    region: oregon
+    plan: free
+    rootDir: api
+    buildCommand: npm install && npx prisma generate && npm run build
+    startCommand: node dist/server.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: "10000"
+      - key: MONGODB_URI
+        sync: false          # Render will prompt you to enter this
+      - key: JWT_SCRET
+        sync: false
+      - key: JWT_EXPIRED_IN
+        value: "30d"
+      - key: JWT_REFRESH_SECRET
+        sync: false
+      - key: JWT_SCRET_SALT_ROUND
+        value: "10"
+      - key: DOCTOR_PASS
+        sync: false
+      - key: PATIENT_PASS
+        sync: false
+      - key: CLOUND_NAME
+        sync: false
+      - key: API_KEY
+        sync: false
+      - key: API_SECRET
+        sync: false
+      - key: EMAIL_PASS
+        sync: false
+      - key: ADMIN_EMAIL
+        sync: false
+      - key: GMAIL_APP_EMAIL
+        sync: false
+
+  # ── Frontend (Static Site) ─────────────────────────────────────
+  - type: web
+    name: doctor-appointment-frontend
+    runtime: static
+    region: oregon
+    plan: free
+    buildCommand: npm install && npm run build
+    staticPublishPath: build
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+    envVars:
+      - key: REACT_APP_USE_LOCAL_API
+        value: "false"
+      - key: REACT_APP_API_BASE_URL_LIVE
+        sync: false          # Will be set to your backend URL after deploy

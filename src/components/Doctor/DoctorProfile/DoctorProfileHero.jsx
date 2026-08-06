@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { FaCheckCircle, FaMapMarkerAlt, FaDollarSign, FaGraduationCap, FaBriefcase, FaAward, FaPhoneAlt, FaEnvelope, FaUserMd, FaCalendarAlt } from 'react-icons/fa';
+import { FaCheckCircle, FaMapMarkerAlt, FaRupeeSign, FaGraduationCap, FaBriefcase, FaAward, FaPhoneAlt, FaEnvelope, FaUserMd, FaCalendarAlt } from 'react-icons/fa';
 import StarRatings from 'react-star-ratings';
 
 const DoctorProfileHero = ({ data }) => {
@@ -9,7 +9,7 @@ const DoctorProfileHero = ({ data }) => {
 	const designation = data.designation || 'Medical Professional';
 	const specialization = data.specialization || 'General';
 	const address = [data.address, data.country].filter(Boolean).join(', ') || data.clinicAddress || '—';
-	const price = data.price != null ? `$${Number(data.price)}` : '—';
+	const price = data.price != null ? `₹${Number(data.price)}` : '—';
 	const experience = '15+ years';
 	const patients = '2,500+';
 	const rating = 5.0;
@@ -72,7 +72,7 @@ const DoctorProfileHero = ({ data }) => {
 								</div>
 							</div>
 							<div className="doctor-hero__stat">
-								<FaDollarSign className="doctor-hero__stat-icon" />
+								<FaRupeeSign className="doctor-hero__stat-icon" />
 								<div>
 									<strong>{price}</strong>
 									<span>Consultation</span>

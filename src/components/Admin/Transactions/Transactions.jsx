@@ -110,7 +110,7 @@ const Transactions = () => {
             width: 120,
             render: (_, record) => (
                 <span className="amount-value">
-                    ${record.paymentInfo?.totalAmount || 0}
+                    ₹{record.paymentInfo?.totalAmount || 0}
                 </span>
             ),
         },

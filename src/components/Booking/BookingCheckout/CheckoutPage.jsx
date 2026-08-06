@@ -167,19 +167,19 @@ const CheckoutPage = ({ handleChange, selectValue, isCheck, setIsChecked, data, 
             </div>
             <div className="summary-row">
               <span>Consultation fee</span>
-              <span>${price}</span>
+              <span>₹{price}</span>
             </div>
             <div className="summary-row">
               <span>Booking fee</span>
-              <span>$10</span>
+              <span>₹10</span>
             </div>
             <div className="summary-row">
               <span>VAT (15%)</span>
-              <span>${vat.toFixed(2)}</span>
+              <span>₹{vat.toFixed(2)}</span>
             </div>
             <div className="summary-row summary-total">
               <span>Total</span>
-              <span className="amount">${total.toFixed(2)}</span>
+              <span className="amount">₹{total.toFixed(2)}</span>
             </div>
           </Card>
         </div>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import StarRatings from 'react-star-ratings';
-import { FaMapMarkerAlt, FaCheckCircle, FaDollarSign, FaClock, FaUserMd, FaComment, FaBriefcaseMedical } from 'react-icons/fa';
+import { FaMapMarkerAlt, FaCheckCircle, FaRupeeSign, FaClock, FaUserMd, FaComment, FaBriefcaseMedical } from 'react-icons/fa';
 import { truncate } from '../../../utils/truncate';
 import './SearchDoctor.css';
 
@@ -12,7 +12,7 @@ const SearchContent = ({ data, compact }) => {
 	const specialization = data?.specialization || 'General';
 	const address = [data?.address, data?.country].filter(Boolean).join(', ') || '—';
 	const clinicAddress = data?.clinicAddress ? truncate(data.clinicAddress, 36) : null;
-	const price = data?.price != null ? `$${Number(data.price)}` : '$60';
+	const price = data?.price != null ? `₹${Number(data.price)}` : '₹60';
 	const rating = 5;
 	const reviewCount = 27;
 
@@ -33,7 +33,7 @@ const SearchContent = ({ data, compact }) => {
 						<span className="doctor-card__photo-ring" aria-hidden="true" />
 					</Link>
 					<div className="doctor-card__price-pill">
-						<FaDollarSign />
+						<FaRupeeSign />
 						<span>{price}</span>
 						<small>consult</small>
 					</div>

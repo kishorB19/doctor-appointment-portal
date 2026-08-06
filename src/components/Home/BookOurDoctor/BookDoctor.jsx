@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './BookDoctor.css';
 import { Link } from 'react-router-dom';
 import { useGetDoctorsQuery } from '../../../redux/api/doctorApi';
-import { FaMapMarkerAlt, FaCheckCircle, FaHeart, FaRegHeart, FaDollarSign, FaClock, FaUserMd } from 'react-icons/fa';
+import { FaMapMarkerAlt, FaCheckCircle, FaHeart, FaRegHeart, FaRupeeSign, FaClock, FaUserMd } from 'react-icons/fa';
 import { useAddFavouriteMutation } from '../../../redux/api/favouriteApi';
 import StarRatings from 'react-star-ratings';
 import { message } from 'antd';
@@ -126,7 +126,7 @@ const BookDoctor = () => {
 							<ul className="book-doctor-card__info">
 								<li><FaMapMarkerAlt /> Georgia, USA</li>
 								<li><FaClock /> Available Fri, 22 Mar</li>
-								<li><FaDollarSign /> $100 – $400</li>
+								<li><FaRupeeSign /> ₹{item?.price || '500'} per consultation</li>
 							</ul>
 							<div className="book-doctor-card__actions">
 								<Link to={`/doctors/profile/${item?.id}`} className="book-doctor-card__btn book-doctor-card__btn--outline">Profile</Link>

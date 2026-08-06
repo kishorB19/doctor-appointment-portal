@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaMapMarkerAlt, FaClock, FaDollarSign, FaPhoneAlt, FaDirections } from 'react-icons/fa';
+import { FaMapMarkerAlt, FaClock, FaRupeeSign, FaPhoneAlt, FaDirections } from 'react-icons/fa';
 import './Location.css';
 
 const locations = [
@@ -14,7 +14,7 @@ const locations = [
 			{ days: 'Saturday', times: ['10:00 AM - 2:00 PM'] },
 			{ days: 'Sunday', times: ['Closed'], closed: true }
 		],
-		price: '$150'
+		price: '₹150'
 	},
 	{
 		id: 2,
@@ -27,7 +27,7 @@ const locations = [
 			{ days: 'Friday', times: ['9:00 AM - 1:00 PM'] },
 			{ days: 'Mon, Sat, Sun', times: ['Closed'], closed: true }
 		],
-		price: '$120'
+		price: '₹120'
 	}
 ];
 

@@ -9,7 +9,7 @@ export const appointStatusDsc = {
         'Follow-up Scheduled': 'If a follow-up appointment is scheduled.',
         cancel: 'If the appointment cannot be completed for some reason.',
         archived: 'If the appointment is closed and moved to historical records.',
-        InProgress: 'Lorem ipsum dollar sumit',
+        InProgress: 'When the appointment is currently taking place.',
         confirmed : 'When the patient and doctor confirms the appointment.',
     },
     followUpDate: 'Represent a different follow-up date.',

@@ -19,7 +19,7 @@ const BlogComment = () => {
                                 <p className='form-text mb-0'>August 2023</p>
                             </div>
                             <p className='form-text'>
-                                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Consectetur recusandae sed nemo illum distinctio minus enim hic eum saepe vel similique doloribus adipisci, autem deleniti dolores unde accusantium eos sequi aliquam, temporibus aspernatur iste! Necessitatibus, obcaecati architecto culpa illum fugiat delectus dolor, numquam autem quo suscipit impedit laboriosam id eos!
+                                Great article! Very informative and helpful information regarding medical wellness and health management. Thank you for sharing these insights!
                             </p>
                         </div>
                     </div>
