@@ -42,13 +42,13 @@ const SignUp = ({ setSignUp }) => {
     useEffect(() => {
         // doctor account
         if (dIsError && dError) {
-            message.error("Email Already Exist !!")
+            const msg = dError?.data?.message || dError?.message || "Registration failed. Please try again.";
+            message.error(typeof msg === 'string' ? msg : "Registration failed.");
             setLoading(false);
         }
 
         if (!dIsError && dIsSuccess) {
             handleSignUpSuccess();
-            setLoading(false);
             setLoading(false);
             swal({
                 icon: 'success',
@@ -59,7 +59,8 @@ const SignUp = ({ setSignUp }) => {
 
         // Patient account
         if (pIsError && pError) {
-            message.error("Email Already Exist !!")
+            const msg = pError?.data?.message || pError?.message || "Registration failed. Please try again.";
+            message.error(typeof msg === 'string' ? msg : "Registration failed.");
             setLoading(false);
         }
         if (!pIsError && pIsSuccess) {
@@ -73,7 +74,7 @@ const SignUp = ({ setSignUp }) => {
             })
         }
 
-    }, [dIsError, dError, pError, pIsError, , pIsLoading, dIsLoading, pData, dData, setSignUp, setLoading, dIsSuccess])
+    }, [dIsError, dError, pError, pIsError, pIsLoading, dIsLoading, pData, dData, setSignUp, setLoading, dIsSuccess, pIsSuccess, userType])
 
     const [emailError, setEmailError] = useState({
         emailError: false
@@ -201,9 +202,6 @@ const SignUp = ({ setSignUp }) => {
                         <span className="ms-2">Password Must Have Number.</span></p>
                 </div>
             </div>
-
-            <p className="social-text">Or Sign up with social account</p>
-            <SocialSignUp />
         </form>
 
     );

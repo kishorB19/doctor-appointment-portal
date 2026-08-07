@@ -43,12 +43,14 @@ const sendVerificationEmail = async (data: Doctor) => {
 }
 
 const create = async (payload: any): Promise<any> => {
+    const { password, ...othersData } = payload;
+    const existEmail = await prisma.auth.findUnique({ where: { email: othersData.email } });
+    const existDoctor = await prisma.doctor.findFirst({ where: { email: othersData.email } });
+    if (existEmail || existDoctor) {
+        throw new ApiError(httpStatus.BAD_REQUEST, "Email Already Exist !!");
+    }
+
     const data = await prisma.$transaction(async (tx) => {
-        const { password, ...othersData } = payload;
-        const existEmail = await tx.auth.findUnique({ where: { email: othersData.email } });
-        if (existEmail) {
-            throw new Error("Email Already Exist !!")
-        }
         const doctor = await tx.doctor.create({ data: othersData });
         await tx.auth.create({
             data: {
@@ -58,14 +60,17 @@ const create = async (payload: any): Promise<any> => {
                 userId: doctor.id
             },
         });
-        return doctor
+        return doctor;
     });
 
-    if (data.id) {
-        await sendVerificationEmail(data)
+    if (data?.id) {
+        try {
+            await sendVerificationEmail(data);
+        } catch (err) {
+            console.log("Email verification notification error:", err);
+        }
     }
     return data;
-
 }
 
 const getAllDoctors = async (filters: IDoctorFilters, options: IOption): Promise<IGenericResponse<Doctor[]>> => {
