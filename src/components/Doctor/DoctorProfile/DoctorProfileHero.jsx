@@ -94,9 +94,6 @@ const DoctorProfileHero = ({ data }) => {
 							<Link to={`/booking/${data.id}`} className="doctor-hero__book-btn">
 								Book appointment
 							</Link>
-							<button className="doctor-hero__chat-btn">
-								Send message
-							</button>
 						</div>
 					</div>
 				</div>
