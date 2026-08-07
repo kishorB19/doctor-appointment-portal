@@ -58,7 +58,7 @@ const Footer = () => {
 								</div>
 								<div className="footer-contact__item">
 									<FaEnvelope className="footer-contact__icon" />
-									<p><a href="mailto:kishor.birajdar@gmail.com">kishor.birajdar@gmail.com</a></p>
+									<p><a href="mailto:kishor1912.b@gmail.com">kishor1912.b@gmail.com</a></p>
 								</div>
 							</div>
 						</div>

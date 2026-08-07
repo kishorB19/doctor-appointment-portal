@@ -119,7 +119,7 @@ const SearchSidebar = ({
 						max={500}
 						value={[priceRange?.min ?? 0, priceRange?.max ?? 500]}
 						onChange={([min, max]) => setPriceRange({ min, max })}
-						marks={{ 0: '$0', 250: '$250', 500: '$500' }}
+						marks={{ 0: '₹0', 250: '₹250', 500: '₹500' }}
 						className="search-sidebar__slider"
 					/>
 				</div>

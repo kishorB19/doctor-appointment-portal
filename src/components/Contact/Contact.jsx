@@ -30,7 +30,7 @@ const Contact = () => {
 		{
 			icon: <FaMapMarkerAlt />,
 			title: 'Visit us',
-			content: '1212 Kazi Nazrul Avenue, Sylhet, Bangladesh 3214'
+			content: 'Kolhapur, Maharashtra, India'
 		},
 		{
 			icon: <FaPhoneAlt />,
@@ -41,8 +41,8 @@ const Contact = () => {
 		{
 			icon: <FaEnvelope />,
 			title: 'Email us',
-			content: 'kishor.birajdar@gmail.com',
-			link: 'mailto:kishor.birajdar@gmail.com'
+			content: 'kishor1912.b@gmail.com',
+			link: 'mailto:kishor1912.b@gmail.com'
 		},
 		{
 			icon: <FaClock />,

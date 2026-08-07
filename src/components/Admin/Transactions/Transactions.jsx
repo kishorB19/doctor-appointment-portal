@@ -64,7 +64,7 @@ const Transactions = () => {
                 moment(t.createdAt).format('YYYY-MM-DD'),
                 t.trackingId,
                 `${t.firstName} ${t.lastName}`,
-                `$${t.paymentInfo?.totalAmount || 0}`,
+                `₹${t.paymentInfo?.totalAmount || 0}`,
                 t.paymentInfo?.paymentMethod || 'N/A',
                 t.paymentStatus
             ])
@@ -156,7 +156,7 @@ const Transactions = () => {
                 </div>
                 <div className="col-md-3 col-sm-6 mb-3">
                     <Card className="stats-mini-card stats-mini-card--success">
-                        <div className="stats-mini-value">${stats.totalRevenue.toFixed(0)}</div>
+                        <div className="stats-mini-value">₹{stats.totalRevenue.toFixed(0)}</div>
                         <div className="stats-mini-label">Total Revenue</div>
                     </Card>
                 </div>
