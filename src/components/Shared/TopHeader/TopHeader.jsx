@@ -1,6 +1,6 @@
 import React from 'react';
 import './index.css';
-import { FaFacebookSquare, FaInstagramSquare, FaLinkedin, FaGithubSquare, FaPhoneAlt, FaEnvelope  } from "react-icons/fa";
+import { FaInstagramSquare, FaLinkedin, FaGithubSquare, FaPhoneAlt, FaEnvelope } from "react-icons/fa";
 
 const TopHeader = () => {
     return (
@@ -11,10 +11,9 @@ const TopHeader = () => {
                     <FaPhoneAlt className='contact-icon'/> <a href="tel:8788366909">8788366909</a> 
                 </div>
                 <div className="d-none d-lg-flex social-links align-items-center">
-                    <a href="www.linkedin.com/in/KishorBirajdar" target='_blank' rel="noreferrer" className="linkedin"><FaLinkedin /></a>
-                    <a href="https://facebook.com" target='_blank' rel="noreferrer" className="facebook"><FaFacebookSquare /></a>
-                    <a href="https://github.com/KishorBirajdar" target='_blank' rel="noreferrer" className=""><FaGithubSquare /></a>
-                    <a href="https://www.instagram.com/KishorBirajdar/" target='_blank' rel="noreferrer" className="instagram"><FaInstagramSquare /></a>
+                    <a href="https://www.linkedin.com/in/kishor-birajdar-5bb25a287/" target='_blank' rel="noreferrer" className="linkedin"><FaLinkedin /></a>
+                    <a href="https://github.com/KishorBirajdar" target='_blank' rel="noreferrer" className="github"><FaGithubSquare /></a>
+                    <a href="https://www.instagram.com/kishor_birajdar19/" target='_blank' rel="noreferrer" className="instagram"><FaInstagramSquare /></a>
                 </div>
             </div>
         </div>
